@@ -1,0 +1,13 @@
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "meta": { "title": "Westway Loft Conversion - WordPress + Claude demo", "author": "anirudhatalmale6-alt" },
+  "landingPage": "/",
+  "preferredVersions": { "php": "8.3", "wp": "latest" },
+  "features": { "networking": true },
+  "login": true,
+  "steps": [
+    { "step": "installTheme", "themeData": { "resource": "url", "url": "https://raw.githubusercontent.com/anirudhatalmale6-alt/westway-wordpress-claude/main/dist/westway.zip" }, "options": { "activate": true } },
+    { "step": "installPlugin", "pluginData": { "resource": "url", "url": "https://raw.githubusercontent.com/anirudhatalmale6-alt/westway-wordpress-claude/main/dist/westway-site.zip" }, "options": { "activate": true } },
+    { "step": "runPHP", "code": "<?php require '/wordpress/wp-load.php'; ww_site_setup();" }
+  ]
+}
