@@ -60,6 +60,16 @@ function ww_replace_tokens( $html ) {
 	return $html;
 }
 
+/* The phone item in the menu: WordPress strips "{phone_link}" from menu URLs, so set the tel: link here. */
+add_filter( 'render_block_core/navigation-link', function ( $html, $block ) {
+	$cls = isset( $block['attrs']['className'] ) ? $block['attrs']['className'] : '';
+	if ( false !== strpos( $cls, 'ww-nav-phone' ) ) {
+		$tel  = preg_replace( '/[^0-9+]/', '', ww_detail( 'phone' ) );
+		$html = preg_replace( '/href="[^"]*"/', 'href="tel:' . esc_attr( $tel ) . '"', $html, 1 );
+	}
+	return $html;
+}, 10, 2 );
+
 /* Photo placeholders: /?ww_ph=label&w=..&h=..&f=hex returns a simple SVG. */
 add_action( 'init', function () {
 	if ( ! isset( $_GET['ww_ph'] ) ) {
